@@ -1,0 +1,5 @@
+/.venv
+/synchronizer.log
+/testDir1
+/testDir2
+/__pycache__
