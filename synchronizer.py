@@ -1,11 +1,6 @@
 import sys, os, shutil, filecmp, time, schedule
 from datetime import datetime
 
-# source path: C:\Users\alexa\OneDrive\Documents\Dev\Tests\python\synchronizer\testDir1
-# replica path: C:\Users\alexa\OneDrive\Documents\Dev\Tests\python\synchronizer\testDir2
-# log path: C:\Users\alexa\OneDrive\Documents\Dev\Tests\python\synchronizer\synchronizer.log
-# python synchronizer.py C:\Users\alexa\OneDrive\Documents\Dev\Tests\python\synchronizer\testDir1 C:\Users\alexa\OneDrive\Documents\Dev\Tests\python\synchronizer\testDir2 10 C:\Users\alexa\OneDrive\Documents\Dev\Tests\python\synchronizer\synchronizer.log
-
 class synchronizer():
     """This module repeatedly synchronizes a replica directory with a source directory, including all files and subdirectories.
 
@@ -116,13 +111,16 @@ It needs 4 arguments:
         print(msg)
         self.log_file.write(msg + "\n")
 
+def cmd_error_output(msg):
+    print("\n" + msg + ", please check the doc:\n\n" + synchronizer.__doc__)
+
 if __name__ == "__main__":
     if len(sys.argv) == 5:
         try:
             sync = synchronizer(*sys.argv[1:])
         except Exception as exception:
-            print("\n" + str(exception) + ", please check the doc:\n\n" + synchronizer.__doc__)
+            cmd_error_output(str(exception))
             exit()
         sync.start()
     else:
-        print("\n4 arguments are required, please check the doc:\n\n" + synchronizer.__doc__)
+        cmd_error_output("4 arguments are required")
